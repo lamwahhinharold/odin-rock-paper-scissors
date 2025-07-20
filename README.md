@@ -7,3 +7,5 @@ This project is aimed at building a console based rock paper scissors game. Once
 ## Live Demo
 
 [Live Site](https://lamwahhinharold.github.io/odin-rock-paper-scissors/)
+
+![Screenshot](./images/screenshot.png)
