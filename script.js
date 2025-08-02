@@ -22,27 +22,21 @@ function capitalizeFirstLetter(val) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
-function displayRoundOutcome(displayString) {
+function displayChoices(sanitizedHumanChoice, computerChoice) {
   const container = document.querySelector("#game-text-display");
-  const roundOutcome = document.createElement("div");
-  roundOutcome.textContent = displayString;
-  container.appendChild(roundOutcome);
+
+  const displayHumanChoice = document.createElement("div");
+  displayHumanChoice.textContent =
+    "Your choice: " + capitalizeFirstLetter(sanitizedHumanChoice);
+  container.appendChild(displayHumanChoice);
+
+  const displayComputerChoice = document.createElement("div");
+  displayComputerChoice.textContent =
+    "Computer's choice: " + capitalizeFirstLetter(computerChoice);
+  container.appendChild(displayComputerChoice);
 }
 
-function playRound(humanChoice, computerChoice) {
-  let sanitizedHumanChoice = humanChoice.toLowerCase();
-  const container = document.querySelector("#game-text-display");
-
-  const humanChoiceDisplay = document.createElement("div");
-  humanChoiceDisplay.textContent =
-    "Your choice: " + capitalizeFirstLetter(sanitizedHumanChoice);
-  container.appendChild(humanChoiceDisplay);
-
-  const computerChoiceDisplay = document.createElement("div");
-  computerChoiceDisplay.textContent =
-    "Computer's choice: " + capitalizeFirstLetter(computerChoice);
-  container.appendChild(computerChoiceDisplay);
-
+function executeRoundLogic(sanitizedHumanChoice, computerChoice) {
   if (sanitizedHumanChoice === "paper" && computerChoice === "rock") {
     displayRoundOutcome("You win! Paper beats Rock");
     humanScore++;
@@ -69,10 +63,44 @@ function playRound(humanChoice, computerChoice) {
     );
     computerScore++;
   }
+}
+
+function displayRoundOutcome(string) {
+  const container = document.querySelector("#game-text-display");
+
+  const roundOutcome = document.createElement("div");
+  roundOutcome.textContent = string;
+  container.appendChild(roundOutcome);
+}
+
+function displayScores() {
+  const container = document.querySelector("#game-text-display");
+
+  const displayHumanScore = document.createElement("div");
+  displayHumanScore.textContent = "Your score: " + humanScore;
+  container.appendChild(displayHumanScore);
+
+  const displayComputerScore = document.createElement("div");
+  displayComputerScore.textContent = "Computer's score: " + computerScore;
+  container.appendChild(displayComputerScore);
+}
+
+function displayRoundEndLineBreak() {
+  const container = document.querySelector("#game-text-display");
 
   const roundEndLineBreak = document.createElement("div");
-  roundEndLineBreak.textContent = "--------------------------------------------------";
+  roundEndLineBreak.textContent =
+    "--------------------------------------------------";
   container.appendChild(roundEndLineBreak);
+}
+
+function playRound(humanChoice, computerChoice) {
+  let sanitizedHumanChoice = humanChoice.toLowerCase();
+
+  displayChoices(sanitizedHumanChoice, computerChoice);
+  executeRoundLogic(sanitizedHumanChoice, computerChoice);
+  displayScores();
+  displayRoundEndLineBreak();
 }
 
 const buttons = document.querySelector("#buttons-container");
