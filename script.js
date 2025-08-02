@@ -53,3 +53,19 @@ function playRound(humanChoice, computerChoice) {
     computerScore++;
   }
 }
+
+const buttons = document.querySelector("#buttons-container");
+buttons.addEventListener("click", (e) => {
+  let target = e.target;
+  switch (target.id) {
+    case "rock-button":
+      playRound("rock", getComputerChoice());
+      break;
+    case "paper-button":
+      playRound("paper", getComputerChoice());
+      break;
+    case "scissors-button":
+      playRound("scissors", getComputerChoice());
+      break;
+  }
+});
