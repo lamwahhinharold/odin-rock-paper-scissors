@@ -53,22 +53,3 @@ function playRound(humanChoice, computerChoice) {
     computerScore++;
   }
 }
-
-function playGame() {
-  for (let i = 1; i <= 5; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
-    console.log("");
-  }
-  console.log("");
-  console.log("Your score: " + humanScore);
-  console.log("Computer's score: " + computerScore);
-  if (humanScore > computerScore) {
-    console.log("You win!");
-  } else if (humanScore < computerScore) {
-    console.log("You lose.");
-  } else {
-    console.log("It's a draw");
-  }
-}
-
-playGame();
