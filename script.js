@@ -13,11 +13,6 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt("What is your choice? Rock, paper or scissors?");
-  return humanChoice;
-}
-
 function capitalizeFirstLetter(val) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
@@ -94,6 +89,33 @@ function displayRoundEndLineBreak() {
   container.appendChild(roundEndLineBreak);
 }
 
+function gameReset() {
+  humanScore = 0;
+  computerScore = 0;
+}
+
+function announceWinnerAndReset() {
+  if (humanScore === 5 && computerScore < 5) {
+    const container = document.querySelector("#game-text-display");
+
+    const announceWinner = document.createElement("div");
+    announceWinner.textContent = "Game ends. You win!";
+    container.appendChild(announceWinner);
+
+    displayRoundEndLineBreak();
+    gameReset();
+  } else if (computerScore === 5 && humanScore < 5) {
+    const container = document.querySelector("#game-text-display");
+
+    const announceWinner = document.createElement("div");
+    announceWinner.textContent = "Game ends. You lose.";
+    container.appendChild(announceWinner);
+
+    displayRoundEndLineBreak();
+    gameReset();
+  }
+}
+
 function playRound(humanChoice, computerChoice) {
   let sanitizedHumanChoice = humanChoice.toLowerCase();
 
@@ -101,6 +123,7 @@ function playRound(humanChoice, computerChoice) {
   executeRoundLogic(sanitizedHumanChoice, computerChoice);
   displayScores();
   displayRoundEndLineBreak();
+  announceWinnerAndReset();
 }
 
 const buttons = document.querySelector("#buttons-container");
