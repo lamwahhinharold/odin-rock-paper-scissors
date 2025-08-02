@@ -2,7 +2,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-  randomValue = Math.floor(Math.random() * 100) + 1;
+  let randomValue = Math.floor(Math.random() * 100) + 1;
 
   if (randomValue <= 33) {
     return "rock";
@@ -14,7 +14,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  humanChoice = prompt("What is your choice? Rock, paper or scissors?");
+  let humanChoice = prompt("What is your choice? Rock, paper or scissors?");
   return humanChoice;
 }
 
@@ -22,29 +22,46 @@ function capitalizeFirstLetter(val) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
+function displayRoundOutcome(displayString) {
+  const container = document.querySelector("#game-text-display");
+  const roundOutcome = document.createElement("div");
+  roundOutcome.textContent = displayString;
+  container.appendChild(roundOutcome);
+}
+
 function playRound(humanChoice, computerChoice) {
   let sanitizedHumanChoice = humanChoice.toLowerCase();
-  console.log("Your choice: " + capitalizeFirstLetter(sanitizedHumanChoice));
-  console.log("Computer's choice: " + capitalizeFirstLetter(computerChoice));
+  const container = document.querySelector("#game-text-display");
+
+  const humanChoiceDisplay = document.createElement("div");
+  humanChoiceDisplay.textContent =
+    "Your choice: " + capitalizeFirstLetter(sanitizedHumanChoice);
+  container.appendChild(humanChoiceDisplay);
+
+  const computerChoiceDisplay = document.createElement("div");
+  computerChoiceDisplay.textContent =
+    "Computer's choice: " + capitalizeFirstLetter(computerChoice);
+  container.appendChild(computerChoiceDisplay);
+
   if (sanitizedHumanChoice === "paper" && computerChoice === "rock") {
-    console.log("You win! Paper beats Rock");
+    displayRoundOutcome("You win! Paper beats Rock");
     humanScore++;
   } else if (
     sanitizedHumanChoice === "scissors" &&
     computerChoice === "paper"
   ) {
-    console.log("You win! Scissors beats Paper");
+    displayRoundOutcome("You win! Scissors beats Paper");
     humanScore++;
   } else if (sanitizedHumanChoice === "rock" && computerChoice === "scissors") {
-    console.log("You win! Rock beats Scissors");
+    displayRoundOutcome("You win! Rock beats Scissors");
     humanScore++;
   } else if (sanitizedHumanChoice === computerChoice) {
-    console.log(
+    displayRoundOutcome(
       "It's a draw. The computer and you both picked " +
         capitalizeFirstLetter(sanitizedHumanChoice)
     );
   } else {
-    console.log(
+    displayRoundOutcome(
       "You lose! " +
         capitalizeFirstLetter(computerChoice) +
         " beats " +
@@ -52,6 +69,10 @@ function playRound(humanChoice, computerChoice) {
     );
     computerScore++;
   }
+
+  const roundEndLineBreak = document.createElement("div");
+  roundEndLineBreak.textContent = "--------------------------------------------------";
+  container.appendChild(roundEndLineBreak);
 }
 
 const buttons = document.querySelector("#buttons-container");
