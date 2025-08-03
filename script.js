@@ -1,3 +1,4 @@
+const container = document.querySelector("#game-text-display");
 let humanScore = 0;
 let computerScore = 0;
 
@@ -18,8 +19,6 @@ function capitalizeFirstLetter(val) {
 }
 
 function displayChoices(sanitizedHumanChoice, computerChoice) {
-  const container = document.querySelector("#game-text-display");
-
   const displayHumanChoice = document.createElement("div");
   displayHumanChoice.textContent =
     "Your choice: " + capitalizeFirstLetter(sanitizedHumanChoice);
@@ -61,16 +60,12 @@ function executeRoundLogic(sanitizedHumanChoice, computerChoice) {
 }
 
 function displayRoundOutcome(string) {
-  const container = document.querySelector("#game-text-display");
-
   const roundOutcome = document.createElement("div");
   roundOutcome.textContent = string;
   container.appendChild(roundOutcome);
 }
 
 function displayScores() {
-  const container = document.querySelector("#game-text-display");
-
   const displayHumanScore = document.createElement("div");
   displayHumanScore.textContent = "Your score: " + humanScore;
   container.appendChild(displayHumanScore);
@@ -81,8 +76,6 @@ function displayScores() {
 }
 
 function displayRoundEndLineBreak() {
-  const container = document.querySelector("#game-text-display");
-
   const roundEndLineBreak = document.createElement("div");
   roundEndLineBreak.textContent =
     "--------------------------------------------------";
@@ -96,8 +89,6 @@ function gameReset() {
 
 function announceWinnerAndReset() {
   if (humanScore === 5 && computerScore < 5) {
-    const container = document.querySelector("#game-text-display");
-
     const announceWinner = document.createElement("div");
     announceWinner.textContent = "Game ends. You win!";
     container.appendChild(announceWinner);
@@ -105,8 +96,6 @@ function announceWinnerAndReset() {
     displayRoundEndLineBreak();
     gameReset();
   } else if (computerScore === 5 && humanScore < 5) {
-    const container = document.querySelector("#game-text-display");
-
     const announceWinner = document.createElement("div");
     announceWinner.textContent = "Game ends. You lose.";
     container.appendChild(announceWinner);
